@@ -1,5 +1,6 @@
 import store
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
@@ -16,6 +17,19 @@ def get_data():
         "description": "bla bla bla",
         "image": "https://www.google.com"
     }]
+
+@app.get("/page", response_class=HTMLResponse)
+def get_page():
+    return """
+    <html>
+        <head>
+            <title>Some HTML in here</title>
+        </head>
+        <body>
+            <h1>Look ma! HTML!</h1>
+        </body>
+    </html>
+    """
 
 def run():
     store.get_products()
